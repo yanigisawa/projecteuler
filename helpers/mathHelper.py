@@ -31,8 +31,5 @@ def isPerfectNumber(x):
 
 def isAbundantNumber(x):
     divisors = getDivisors(x)
-    sum = 0
-    for n in divisors:
-        sum = sum + n
-    return sum > x
+    return sum(divisors) > x
 
