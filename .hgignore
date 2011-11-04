@@ -1,0 +1,11 @@
+syntax: glob
+*.pyc
+*.pyo
+.DS_Store
+*.egg-info
+*.bak
+*.rej
+*$py.class
+*.orig
+.*.sw[nop]
+
