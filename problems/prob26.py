@@ -1,17 +1,38 @@
-#A unit fraction contains 1 in the numerator. The decimal representation of the
-#unit fractions with denominators 2 to 10 are given:
-#
-#    1/2 =   0.5
-#    1/3 =   0.(3)
-#    1/4 =   0.25
-#    1/5 =   0.2
-#    1/6 =   0.1(6)
-#    1/7 =   0.(142857)
-#    1/8 =   0.125
-#    1/9 =   0.(1)
-#    1/10    =   0.1
-#Where 0.1(6) means 0.166666..., and has a 1-digit recurring cycle. It can be
-#seen that 1/7 has a 6-digit recurring cycle.
-#
-#Find the value of d  1000 for which 1/d contains the longest recurring 
-#cycle in its decimal fraction part.
+#!/usr/local/bin/python
+
+from decimal import *
+from time import sleep
+
+decimalPrecision = 105000
+
+def decimalRecurrence(x):
+    s = str(x)[2:]
+    if len(s) < decimalPrecision:
+        return 0
+    r = []
+    prev = ''
+    didRepeat = False
+    #print(s)
+    for i in range(len(s)):
+        for j in range(i+1, len(s)):
+            l = j - i
+            if s[i:i+l] == s[j:j+l]:
+                return l
+
+    return 0
+
+def prob26():
+    max = 0
+    d = 0
+    getcontext().prec = decimalPrecision
+    for n in (range(1, 1001)):
+        fraction = 1 / Decimal(n)
+        recur = decimalRecurrence(fraction)
+        if recur > max:
+            max = recur
+            d = n
+        #print("1 / %s = %s - Recurrence: %s" % (n, fraction, recur))
+
+    print("Max Recurrence: %s - d: %s" % (max, d))
+
+prob26()
