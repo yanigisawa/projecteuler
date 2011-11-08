@@ -1,38 +1,34 @@
 #!/usr/local/bin/python
 
-from decimal import *
-from time import sleep
+import sys
+sys.path.append("../helpers")
+from primes import getPrimes
 
-decimalPrecision = 105000
+decimalPrecision = 10
 
 def decimalRecurrence(x):
     s = str(x)[2:]
-    if len(s) < decimalPrecision:
+    if x == 2 or x == 5:
         return 0
-    r = []
-    prev = ''
-    didRepeat = False
-    #print(s)
-    for i in range(len(s)):
-        for j in range(i+1, len(s)):
-            l = j - i
-            if s[i:i+l] == s[j:j+l]:
-                return l
 
-    return 0
+    i = 1
+    # http://en.wikipedia.org/wiki/Cyclic_number#Form_of_cyclic_numbers
+    while ((10 ** i) - 1) % x != 0:
+        i = i + 1
+
+    return i
 
 def prob26():
     max = 0
     d = 0
-    getcontext().prec = decimalPrecision
-    for n in (range(1, 1001)):
-        fraction = 1 / Decimal(n)
-        recur = decimalRecurrence(fraction)
+    primes = getPrimes()
+    for n in primes:
+        if n > 1000: break
+        recur = decimalRecurrence(n)
         if recur > max:
             max = recur
             d = n
-        #print("1 / %s = %s - Recurrence: %s" % (n, fraction, recur))
 
-    print("Max Recurrence: %s - d: %s" % (max, d))
+    print("Max Recurrence: %s - d = %s" % (max, d))
 
 prob26()
