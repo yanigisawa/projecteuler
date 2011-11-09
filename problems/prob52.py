@@ -8,13 +8,10 @@ def containSameDigits(x, y):
     if len(xchars) != len(ychars):
         return False
 
-    for i in range(len(xchars)):
-        if xchars[i] not in ychars:
-            return False
+    xchars.sort()
+    ychars.sort()
 
-        ychars.remove(xchars[i])
-
-    return True
+    return xchars == ychars
 
 def prob52():
     m = 10000000
