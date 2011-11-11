@@ -14,22 +14,27 @@ sys.path.append('../helpers')
 from primes import *
 from mathHelper import *
 
-allPrimes = getPrimes()
-primes = getPrimesForTruncation()
+primes = getPrimes()
 
 def isTruncatablePrime(x):
     if x <= 7: return False
 
     xstr = str(x)
+    if int(xstr[0]) not in [2, 3, 5, 7]: return False
+    elif int(xstr[-1]) not in [3, 7]: return False
+    elif '2' in xstr[1:]: return False
+    elif '4' in xstr[1:]: return False
+    elif '6' in xstr[1:]: return False
+    elif '8' in xstr[1:]: return False
 
     for i in range(len(xstr)):
         y = int(xstr[i:])
-        if y not in allPrimes:
+        if y not in primes:
             return False
 
     for i in range(1, len(xstr) + 1):
         y = int(xstr[0:i])
-        if y not in allPrimes:
+        if y not in primes:
             return False
 
     return True
@@ -42,9 +47,11 @@ def prob37():
         if p > 7 and isTruncatablePrime(p):
             count = count + 1
             trunc.append(p)
+        if len(trunc) == 11:
+            break
 
     print("Found %s truncatable primes" % count)
     print(trunc)
-    print("Sum %s: " % sum(set(trunc)))
+    print("Sum: %s" % sum(set(trunc)))
 
 prob37()
