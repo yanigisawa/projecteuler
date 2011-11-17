@@ -2,35 +2,31 @@
 
 import time
 coins = [200, 100, 50, 20, 10, 5, 2, 1]
-#coins = [200, 100, 50]
+#coins = [200, 100, 50, 20, 10]
 combinations = 0
 
 
 def findCombination(coinIndex, coinCount, purseTotal):
     global combinations
-    if purseTotal > 200: return
-    if coinIndex > (len(coins) - 1): return
+    #if purseTotal > 200: return 0
+    if coinIndex > (len(coins) - 1): return 0
     if purseTotal == 200:
         combinations += 1
-        return
+        return 0
 
-    while purseTotal < 200:
-        #time.sleep(1)
-        tmp = coins[coinIndex] * coinCount
-        #print("Coin Index: %s - Purse Total %s - tmp: %s - Coin Count %s" 
-        #    % (coinIndex, purseTotal, tmp, coinCount))
-        if tmp + purseTotal == 200:
+    while True: 
+        coinValue = coins[coinIndex] * coinCount
+        newPurseTotal = coinValue + purseTotal
+        if newPurseTotal == 200:
             combinations += 1
-            purseTotal += tmp
-            findCombination(coinIndex + 1, 1, 0)
-            #return
-        elif tmp + purseTotal > 200:
             findCombination(coinIndex + 1, 1, purseTotal)
-            #break
+            break
+        elif newPurseTotal > 200:
+            findCombination(coinIndex + 1, 1, purseTotal)
+            break
         else:
-            findCombination(coinIndex + 1, 1, tmp + purseTotal)
+            findCombination(coinIndex + 1, 1, newPurseTotal)
             coinCount += 1
-
 
 
 
@@ -39,3 +35,12 @@ def prob31():
     print("Found combinations: %s" % combinations)
 
 prob31()
+
+#  $ time ./31.py 
+#  Found combinations: XXXXX
+#  
+#  real	0m2.142s
+#  user	0m2.128s
+#  sys	0m0.011s
+#  $ 
+#  
