@@ -15,7 +15,7 @@ def findCombination(coinIndex, coinCount, purseTotal):
         newPurseTotal = coinValue + purseTotal
         findCombination(coinIndex + 1, 1, newPurseTotal)
 
-        if newPurseTotal >= 200:
+        if newPurseTotal > 200:
             findCombination(coinIndex + 1, 1, purseTotal)
             break
         else:
