@@ -13,12 +13,12 @@ def findCombination(coinIndex, coinCount, purseTotal):
     while True: 
         coinValue = coins[coinIndex] * coinCount
         newPurseTotal = coinValue + purseTotal
+        findCombination(coinIndex + 1, 1, newPurseTotal)
+
         if newPurseTotal >= 200:
-            findCombination(coinIndex + 1, 1, newPurseTotal)
             findCombination(coinIndex + 1, 1, purseTotal)
             break
         else:
-            findCombination(coinIndex + 1, 1, newPurseTotal)
             coinCount += 1
 
 def prob31():
