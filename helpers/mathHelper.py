@@ -33,3 +33,7 @@ def isAbundantNumber(x):
     divisors = getDivisors(x)
     return sum(divisors) > x
 
+def getCombinations(n, r):
+    numerator = math.factorial(n)
+    denominator = math.factorial(r) * math.factorial(n - r)
+    return numerator / denominator
