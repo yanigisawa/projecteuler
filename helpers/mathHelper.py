@@ -22,6 +22,23 @@ def getDivisors(x):
             divs.append(y)
     return divs
 
+def getGCD(n, d):
+    nDivs = getDivisors(n)
+    nDivs.append(n)
+    dDivs = getDivisors(d)
+    gcd = 1
+    for i in nDivs:
+        if i in dDivs:
+            if i > gcd:
+                gcd = i
+    return gcd
+
+def reduceFraction(n, d):
+    gcd = getGCD(n, d)
+    newN = n / gcd
+    newD = d / gcd
+    return [newN, newD]
+
 def isPerfectNumber(x):
     divisors = getDivisors(x)
     sum = 0
