@@ -7,7 +7,6 @@ def getPrimes():
         for line in f:
             stringList = line.split()
             intList = [int(x) for x in stringList]
-            for x in intList:
-                primes.append(x)
+            primes.extend(intList)
     return primes
 
