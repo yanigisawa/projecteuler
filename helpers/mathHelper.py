@@ -54,3 +54,14 @@ def getCombinations(n, r):
     numerator = math.factorial(n)
     denominator = math.factorial(r) * math.factorial(n - r)
     return numerator / denominator
+
+def isPandigital(n):
+    nstr = str(n)
+    cpy = nstr
+    for x in range(1, len(nstr) + 1):
+        if str(x) in nstr:
+            cpy = cpy.replace(str(x), "", 1) # replace only 1 character
+        else:
+            return False
+
+    return cpy == ""
