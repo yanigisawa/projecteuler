@@ -65,3 +65,9 @@ def isPandigital(n):
             return False
 
     return cpy == ""
+
+def isPalindrome(n):
+    n = str(n)
+    # note [::-1] will reverse a string
+    return n == n[::-1]
+
