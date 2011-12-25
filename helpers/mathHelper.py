@@ -1,4 +1,5 @@
 import math
+import primes
 
 def quadratic(a, b, n):
     return (n * n) + a * n + b
@@ -21,6 +22,22 @@ def getDivisors(x):
         if x % y == 0:
             divs.append(y)
     return divs
+
+def getPrimeFactors(x):
+    allPrimes = primes.getPrimesBelow(x)
+
+    factors = []
+    workingx = x
+    while 1:
+        if workingx == 1:
+            break
+
+        for p in allPrimes:
+            if workingx % p == 0:
+                factors.append(p)
+                workingx /= p
+                break
+    return factors
 
 def getGCD(n, d):
     nDivs = getDivisors(n)

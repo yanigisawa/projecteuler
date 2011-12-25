@@ -10,3 +10,16 @@ def getPrimes():
             primes.extend(intList)
     return primes
 
+def getPrimesBelow(x):
+    primes = []
+    with open("../datafiles/primes1.txt") as f:
+        for line in f:
+            stringList = line.split()
+            intList = [int(y) for y in stringList]
+            for i in intList:
+                if i > x:
+                    return primes
+                else:
+                    primes.append(i)
+    return primes
+
