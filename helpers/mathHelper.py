@@ -7,6 +7,8 @@ def quadratic(a, b, n):
 def isPrime(x):
     y = 2
     x = math.fabs(x)
+    if x % y == 0:
+        return False
     while y < (x / 2):
         if x % y == 0:
             #print("Divisor: %s", y)
@@ -24,6 +26,10 @@ def getDivisors(x):
     return divs
 
 def getPrimeFactors(x):
+    if x == 0:
+        return [0]
+    if x == 1:
+        return [1]
     allPrimes = primes.getPrimesBelow(x)
 
     factors = []
@@ -87,4 +93,11 @@ def isPalindrome(n):
     n = str(n)
     # note [::-1] will reverse a string
     return n == n[::-1]
+
+def getPentagonal(n):
+    return n * (3 * n - 1) / 2
+
+def isPentagonal(x):
+    n = (math.sqrt(24 * x + 1)) + 1 / 6
+    return n % 1 == 0
 
