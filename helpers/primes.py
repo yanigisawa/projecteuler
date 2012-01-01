@@ -23,3 +23,12 @@ def getPrimesBelow(x):
                     primes.append(i)
     return primes
 
+def getPrimeRange(x, y):
+    tmpPrimes = getPrimesBelow(y)
+    primeRange = []
+    for p in tmpPrimes:
+        if p > x:
+            primeRange.append(p)
+
+    return primeRange
+
