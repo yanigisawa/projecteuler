@@ -4,26 +4,36 @@ import sys
 sys.path.append('../helpers')
 import mathHelper
 
+def getDistinctPrimeFactors(factors):
+    distinctFactors = []
+    for f in factors:
+        if f not in distinctFactors:
+            distinctFactors.append(f)
+
+    return distinctFactors
+
 def prob47():
     factorLists = []
     curr = []
-    factorLength = 2
+    factorLength = 4
     prev = []
-    for i in range(4, 17):
-        print("i: %s" % i)
+    for i in range(100000, 1000000):
+        if i % 1000 == 0: print("i: %s" % i)
         if mathHelper.isPrime(i):
-            factorLists.pop()
+            if len(factorLists) > 0: factorLists.pop()
             continue
 
-        curr = mathHelper.getPrimeFactors(i) 
-        print("Prime Factors(%s) - %s" % (i, curr))
+        curr = getDistinctPrimeFactors(mathHelper.getPrimeFactors(i))
 
-
-        if len(factorLists) > 1:
+        if len(factorLists) >= 1:
             prev = factorLists[-1]
-            if prev == curr: 
+
+            if prev[0] < i - 1:
+                factorLists = []
+            elif prev[1] == curr: 
                 factorLists.pop(0)
-        elif prev != curr:
+
+        if prev != curr and len(curr) == factorLength:
             tmp = [i, curr]
             factorLists.append(tmp)
 
