@@ -98,6 +98,6 @@ def getPentagonal(n):
     return n * (3 * n - 1) / 2
 
 def isPentagonal(x):
-    n = (math.sqrt(24 * x + 1)) + 1 / 6
+    n = (math.sqrt(24 * x + 1) + 1) / float(6)
     return n % 1 == 0
 
