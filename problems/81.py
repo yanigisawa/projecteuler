@@ -4,6 +4,7 @@ from time import sleep
 
 def getMatrix():
     matrix = []
+    #with open("../datafiles/problem81_example.txt") as f:
     with open("../datafiles/problem81_matrix.txt") as f:
         for line in f:
             line = line.strip()
@@ -15,27 +16,26 @@ def getMatrix():
 
 def recurs(matrix, x, y):
     edge = len(matrix) - 1
+    if x > edge: return -1
+    if y > edge: return -1
+
     if x == edge and y == edge:
         return matrix[x][y]
 
-    rightSum = -1 
-    if x < edge:
-        rightSum = matrix[x][y] + recurs(matrix, x + 1, y)
+    rightNum = recurs(matrix, x + 1, y)
+    downNum = recurs(matrix, x, y + 1)
+    if rightNum == -1 and downNum == -1:
+        return -1
 
-    downSum = -1
-    if y < edge:
-        downSum = matrix[x][y] + recurs(matrix, x, y + 1)
-
-    if rightSum == -1 and downSum == -1:
-        return matrix[x][y]
-    elif downSum == -1:
-        return rightSum
-    elif rightSum == -1:
-        return downSum
-    elif rightSum < downSum:
-        return rightSum
+    if rightNum == -1:
+        return matrix[x][y] + downNum
+    elif downNum == -1:
+        return matrix[x][y] + rightNum
+    elif rightNum < downNum:
+        return matrix[x][y] + rightNum
     else:
-        return downSum
+        return matrix[x][y] + downNum 
+
     
 def prob81():
     matrix = getMatrix()
